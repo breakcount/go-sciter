@@ -13,7 +13,9 @@ func main() {
 	if err != nil {
 		log.Fatal("Create Window Error: ", err)
 	}
-	fullpath, err := filepath.Abs("./examples/callback/index.html")//fullpath, err := filepath.Abs("index.html")
+	w.SetOption(sciter.SCITER_SET_SCRIPT_RUNTIME_FEATURES, sciter.ALLOW_FILE_IO | sciter.ALLOW_SOCKET_IO|sciter.ALLOW_EVAL | sciter.ALLOW_SYSINFO)
+
+	fullpath, err := filepath.Abs("./examples.ts/callback/index.html")//fullpath, err := filepath.Abs("index.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,7 +39,8 @@ func setEventHandler(w *window.Window) {
 			return true
 		})
 		fn := args[2]
-		fn.Invoke(sciter.NullValue(), "[Native Script]", sciter.NewValue("OK"))
+		fn.Invoke(sciter.NullValue(), "[Native Script]", sciter.NewValue("OK"))//调用 javascript
+
 		ret := sciter.NewValue()
 		ret.Set("ip", sciter.NewValue("127.0.0.1"))
 		return ret

@@ -1,19 +1,31 @@
-<div>
-    <button id="btn">Click Me</button>
-</div>
-<script type="text/javascript" >
-function callback(abc){
-    //view.msgbox(#information,abc);
-    console.log("callback")
-}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <p id="demo">Hello，world</p>
+    <div>
+        <button id="btn">Click Me</button>
+    </div>
+    <script type="text/javascript" >
+        function callback(abc){
+            //Window.msgbox(#information,abc);
+            document.getElementById("demo").innerHTML = "callback JavaScript" + abc;
+            console.log("callback")
+        }
 
-// $(#btn).on("click",function(){
-//     var obj = {num:100, str:"Hello World"};
-//     view.getNetInformation(1,"test",callback, obj);
-// });
-let btn = document.getElementById('btn');
-btn.addEventListener('click', () => {
-    var obj = {num:100, str:"Hello World"};
-    view.getNetInformation(1,"test",callback, obj);
-})
-</script>
+        // $(#btn).on("click",function(){
+        //     var obj = {num:100, str:"Hello World"};
+        //     view.getNetInformation(1,"test",callback, obj);
+        // });
+        let btn = document.getElementById('btn');
+        btn.addEventListener('click', () => {
+            var obj = {num:100, str:"Hello World"};
+            //view.getNetInformation(1,"test",callback, obj);
+            var r = Window.this.xcall("getNetInformation",1,"test",callback, obj);
+            console.log(r)
+        })
+    </script>
+</body>
+</html>
