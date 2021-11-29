@@ -59,7 +59,7 @@ func main() {
 		log.Fatal(err)
 	}
 	//加载文件
-	fullpath, err := filepath.Abs("demo6.html")
+	fullpath, err := filepath.Abs("./examples/demoes/06/demo6.html")
 	if err != nil {
 		log.Fatal(err)
 	}
