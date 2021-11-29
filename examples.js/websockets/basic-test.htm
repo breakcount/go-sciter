@@ -14,7 +14,7 @@
 
   <script>
 
-    var wsUri = "wss://echo.websocket.org/";
+    var wsUri = "ws://localhost:8080/"; //wss://echo.websocket.org/";
     var output;
     var websocket;
 
@@ -45,8 +45,8 @@
     function onMessage(evt)
     {
       writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-      websocket.close();
-      websocket = null;
+      //websocket.close();//关闭了
+      //websocket = null;
     }
 
     function onError(evt)
