@@ -11,23 +11,23 @@ h1 {
         </style>
         <script|module>
 
-import {devicePixels} from "@sciter";
+        import {devicePixels} from "@sciter";
 
 
-class App extends Element {
+        class App extends Element {
 
-  componentDidMount() {
-    Window.this.on("mediachange", ()=>{this.componentUpdate()});
-  }
+          componentDidMount() {
+            Window.this.on("mediachange", ()=>{this.componentUpdate()});
+          }
 
-  render() {
-    let dpi = devicePixels("1in");
-    return <h1>DPI:{dpi}</h1>;
-  }
-    
-}
+          render() {
+            let dpi = devicePixels("1in");
+            return <h1>DPI:{dpi}</h1>;
+          }
 
-document.body.content(<App />);
+        }
+
+        document.body.content(<App />);
 
 
         </script>

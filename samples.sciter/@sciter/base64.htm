@@ -4,22 +4,22 @@
         <style></style>
         <script|module>
 
-import * as rt from "@sciter";
-import * as sys from "@sys";
+        import * as rt from "@sciter";
+        import * as sys from "@sys";
 
-(function() {
-  
-  let arrayBuffer = sys.fs.$readfile(URL.toPath(__DIR__ + "test.txt"));
+        (function() {
 
-  document.$("pre#original").innerText = rt.decode(arrayBuffer,"utf-8"); 
+          let arrayBuffer = sys.fs.$readfile(URL.toPath(__DIR__ + "test.txt"));
 
-  let base64 = rt.toBase64(arrayBuffer);
+          document.$("pre#original").innerText = rt.decode(arrayBuffer,"utf-8");
 
-  document.$("pre#base64").innerText = base64;
+          let base64 = rt.toBase64(arrayBuffer);
 
-  document.$("pre#text").innerText = rt.decode(rt.fromBase64(base64),"utf-8"); 
+          document.$("pre#base64").innerText = base64;
 
-})();
+          document.$("pre#text").innerText = rt.decode(rt.fromBase64(base64),"utf-8");
+
+        })();
 
         </script>
     </head>

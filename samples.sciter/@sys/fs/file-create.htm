@@ -4,32 +4,32 @@
         <style></style>
         <script|module>
 
-import * as sys from "@sys";
-import * as srt from "@sciter";
+        import * as sys from "@sys";
+        import * as srt from "@sciter";
 
-document.on("click", "#async", async function() {
-   const path = URL.toPath(__DIR__ + "test1.txt");
-   console.log(path);
+        document.on("click", "#async", async function() {
+           const path = URL.toPath(__DIR__ + "test1.txt");
+           console.log(path);
 
-   const file = await sys.fs.open(path, "w+", 0o666)
+           const file = await sys.fs.open(path, "w+", 0o666)
 
-   const element = document.$("input");
+           const element = document.$("input");
 
-   await file.write(element.value || "test");
-   await file.close();
-});
+           await file.write(element.value || "test");
+           await file.close();
+        });
 
-document.on("click", "#sync", function() {
-   const path = URL.toPath(__DIR__ + "test2.txt");
-   console.log(path);
+        document.on("click", "#sync", function() {
+           const path = URL.toPath(__DIR__ + "test2.txt");
+           console.log(path);
 
-   const file = sys.fs.$open(path, "w+", 0o666);
+           const file = sys.fs.$open(path, "w+", 0o666);
 
-   const element = document.$("input");
+           const element = document.$("input");
 
-   file.$write( srt.encode(element.value,"utf-8"));
-   file.$close();
-});
+           file.$write( srt.encode(element.value,"utf-8"));
+           file.$close();
+        });
 
 
         </script>

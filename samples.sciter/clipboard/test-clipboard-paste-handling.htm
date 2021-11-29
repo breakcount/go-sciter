@@ -4,14 +4,14 @@
         <style></style>
         <script>
 
-document.$("htmlarea").on("^exec:edit:paste",function() {
-  const out = document.$("pre#content");
-  const clipboardData = Clipboard.read();
+        document.$("htmlarea").on("^exec:edit:paste",function() {
+          const out = document.$("pre#content");
+          const clipboardData = Clipboard.read();
 
-  out.innerText = JSON.stringify(clipboardData, null, "  ");
-  return true;
+          out.innerText = JSON.stringify(clipboardData, null, "  ");
+          return true;
 
-});
+        });
 
         </script>
     </head>

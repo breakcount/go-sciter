@@ -4,13 +4,13 @@
         <style></style>
         <script>
 
-document.on("click","button#read", function() {
-  const out = document.$("pre#content");
-  const clipboardData = Clipboard.read();
+        document.on("click","button#read", function() {
+          const out = document.$("pre#content");
+          const clipboardData = Clipboard.read();
 
-  out.innerText = JSON.stringify(clipboardData, null, "  ");
+          out.innerText = JSON.stringify(clipboardData, null, "  ");
 
-});
+        });
 
         </script>
     </head>
