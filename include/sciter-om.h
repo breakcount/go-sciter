@@ -32,6 +32,8 @@ namespace sciter {
 
     template <class R> class hasset;
 
+    // implementation of som_asset_t ISA
+    // note: does not define asset_add_ref()/asset_release() as they shall be defined in specializations 
     template <class A>
     class iasset : public som_asset_t
     {
@@ -69,8 +71,7 @@ namespace sciter {
       static const char* interface_name() { return "asset.sciter.com"; }
       //template<class C> hasset<C> interface_of() { hasset<C> p; get_interface(C::interface_name(), p.target()); return p; }
     };
-
-
+    
     inline long asset_add_ref(som_asset_t *ptr) {
       assert(ptr);
       assert(ptr->isa);
@@ -89,7 +90,7 @@ namespace sciter {
       assert(ptr->isa->asset_get_interface);
       return ptr->isa->asset_get_interface(ptr, name, out);
     }
-
+    
     inline som_passport_t* asset_get_passport(som_asset_t *ptr) {
       assert(ptr);
       assert(ptr->isa);
@@ -97,6 +98,11 @@ namespace sciter {
       return ptr->isa->asset_get_passport(ptr);
     }
 
+    inline som_asset_class_t* asset_get_class(som_asset_t *ptr) {
+      assert(ptr);
+      return ptr->isa;
+    }
+    
     //hasset - yet another shared_ptr
     //         R here is something derived from the iasset (om::iasset) above
     template <class R> class hasset
@@ -179,9 +185,16 @@ namespace sciter {
         delete static_cast<C*>(this);
       }
     };
-
-
   }
+
+  template <class AT>
+  inline AT* value::get_asset() const {
+    som_asset_t* pass = get_asset();
+    if (pass && (som_asset_get_class(pass) == AT::get_asset_class()))
+      return static_cast<AT*>(pass);
+    return nullptr;
+  }
+
 }
 
 #endif

@@ -1,10 +1,10 @@
 /*
  * The Sciter Engine of Terra Informatica Software, Inc.
  * http://sciter.com
- *
+ * 
  * The code and information provided "as-is" without
  * warranty of any kind, either expressed or implied.
- *
+ * 
  * (C) 2003-2015, Terra Informatica Software, Inc.
  */
 
@@ -117,7 +117,7 @@ enum SC_LOAD_DATA_RETURN_CODES
 #define SC_ENGINE_DESTROYED 0x05
 
 /**Posted notification.
-
+ 
  * \param lParam #LPSCN_POSTED_NOTIFICATION
  *
  **/
@@ -126,7 +126,7 @@ enum SC_LOAD_DATA_RETURN_CODES
 
 /**This notification is sent when the engine encounters critical rendering error: e.g. DirectX gfx driver error.
    Most probably bad gfx drivers.
-
+ 
  * \param lParam #LPSCN_GRAPHICS_CRITICAL_FAILURE
  *
  **/
@@ -149,7 +149,7 @@ enum SC_LOAD_DATA_RETURN_CODES
 #define SC_INVALIDATE_RECT 0x09
 
 
-/**Notification callback structure.
+/**Notification callback structure.        通知的回调结构。
  **/
 typedef struct SCITER_CALLBACK_NOTIFICATION
 {
@@ -286,7 +286,7 @@ typedef SCN_INVALIDATE_RECT *LPSCN_INVALIDATE_RECT;
  * \param[in] uri \b LPCWSTR, URI of the data requested by Sciter.
  * \param[in] data \b LPBYTE, pointer to data buffer.
  * \param[in] dataLength \b UINT, length of the data in bytes.
- * \return \b BOOL, TRUE if Sciter accepts the data or \c FALSE if error occured
+ * \return \b SBOOL, TRUE if Sciter accepts the data or \c FALSE if error occured
  * (for example this function was called outside of #SCN_LOAD_DATA request).
  *
  * \warning If used, call of this function MUST be done ONLY while handling
@@ -303,7 +303,7 @@ typedef SCN_INVALIDATE_RECT *LPSCN_INVALIDATE_RECT;
  * \param[in] data \b LPBYTE, pointer to data buffer.
  * \param[in] dataLength \b UINT, length of the data in bytes.
  * \param[in] requestId \b LPVOID, SCN_LOAD_DATA requestId, can be NULL.
- * \return \b BOOL, TRUE if Sciter accepts the data or \c FALSE if error occured
+ * \return \b SBOOL, TRUE if Sciter accepts the data or \c FALSE if error occured
  **/
 
  BOOL SCAPI SciterDataReadyAsync(HWINDOW hwnd,LPCWSTR uri, LPCBYTE data, UINT dataLength,
@@ -324,7 +324,7 @@ typedef SCN_INVALIDATE_RECT *LPSCN_INVALIDATE_RECT;
  *
  * \param[in] hWndSciter \b HWINDOW, Sciter window handle.
  * \param[in] url \b LPCWSTR, either absolute URL of HTML file to load. "file://...", "http://...", "res:...", "this://app/..." or absolute file path.
- * \return \b BOOL, \c TRUE if the text was parsed and loaded successfully, \c FALSE otherwise.
+ * \return \b SBOOL, \c TRUE if the text was parsed and loaded successfully, \c FALSE otherwise.
  **/
  BOOL SCAPI     SciterLoadFile(HWINDOW hWndSciter, LPCWSTR url);
 
@@ -335,11 +335,11 @@ typedef SCN_INVALIDATE_RECT *LPSCN_INVALIDATE_RECT;
  * \param[in] htmlSize \b UINT, Length of the array pointed by html parameter.
  * \param[in] baseUrl \b LPCWSTR, base URL. All relative links will be resolved against
  *                                this URL.
- * \return \b BOOL, \c TRUE if the text was parsed and loaded successfully, FALSE otherwise.
+ * \return \b SBOOL, \c TRUE if the text was parsed and loaded successfully, FALSE otherwise.
  **/
  BOOL SCAPI     SciterLoadHtml(HWINDOW hWndSciter, LPCBYTE html, UINT htmlSize, LPCWSTR baseUrl);
 
-/**Set \link #SCITER_NOTIFY() notification callback function \endlink.
+/**Set \link #SCITER_NOTIFY() notification callback function      SCITER_NOTIFY()通知回调函数 \endlink.
  *
  * \param[in] hWndSciter \b HWINDOW, Sciter window handle.
  * \param[in] cb \b SCITER_NOTIFY*, \link #SCITER_NOTIFY() callback function \endlink.
@@ -467,7 +467,7 @@ enum SCITER_RT_OPTIONS
    SCITER_SET_SCRIPT_RUNTIME_FEATURES = 8, // value - combination of SCRIPT_RUNTIME_FEATURES flags.
    SCITER_SET_GFX_LAYER = 9,      // hWnd = NULL, value - GFX_LAYER
    SCITER_SET_DEBUG_MODE = 10,    // hWnd, value - TRUE/FALSE
-   SCITER_SET_UX_THEMING = 11,    // hWnd = NULL, value - BOOL, TRUE - the engine will use "unisex" theme that is common for all platforms.
+   SCITER_SET_UX_THEMING = 11,    // hWnd = NULL, value - SBOOL, TRUE - the engine will use "unisex" theme that is common for all platforms. 
                                   // That UX theme is not using OS primitives for rendering input elements. Use it if you want exactly
                                   // the same (modulo fonts) look-n-feel on all platforms.
 
@@ -480,9 +480,13 @@ enum SCITER_RT_OPTIONS
 
    SCITER_SET_MAX_HTTP_DATA_LENGTH = 15, // hWnd - N/A , value - max request length in megabytes (1024*1024 bytes)
 
-};
+   SCITER_SET_PX_AS_DIP = 16, // value 1 - 1px in CSS is treated as 1dip, value 0 - default behavior - 1px is a physical pixel 
 
- BOOL SCAPI SciterSetOption(HWINDOW hWnd, UINT option, UINT_PTR value );
+   SCITER_ENABLE_UIAUTOMATION = 17,  // hWnd - N/A , TRUE/FALSE, enables UIAutomation support. 
+
+} ;
+
+ SBOOL SCAPI SciterSetOption(HWINDOW hWnd, UINT option, UINT_PTR value );
 
 /**Get current pixels-per-inch metrics of the Sciter window
  *
@@ -525,7 +529,7 @@ typedef VOID SC_CALLBACK URL_DATA_RECEIVER( const URL_DATA* pUrlData, LPVOID par
  * \param[in] receiver \b URL_DATA_RECEIVER, address of reciver callback.
  * \param[in] param \b LPVOID, param passed to callback as it is.
  * \param[in] url \b LPCSTR, optional, url of the data. If not provided the engine will list all loaded resources
- * \return \b BOOL, \c TRUE if receiver is called at least once, FALSE otherwise.
+ * \return \b SBOOL, \c TRUE if receiver is called at least once, FALSE otherwise.
  *
  **/
 
@@ -538,7 +542,7 @@ typedef VOID SC_CALLBACK URL_DATA_RECEIVER( const URL_DATA* pUrlData, LPVOID par
 *
 * \param[in] hwnd \b HWINDOW, window handle to create Sciter on.
 * \param[in] IDXGISwapChain \b pSwapChain,  reference of IDXGISwapChain created on the window.
-* \return \b BOOL, \c TRUE if engine instance is created, FALSE otherwise.
+* \return \b SBOOL, \c TRUE if engine instance is created, FALSE otherwise.
 *
 **/
 
@@ -549,8 +553,8 @@ BOOL SCAPI SciterCreateOnDirectXWindow(HWINDOW hwnd, IUnknown* pSwapChain); // I
 *
 * \param[in] hwnd \b HWINDOW, window handle to create Sciter on.
 * \param[in] HELEMENT \b elementToRenderOrNull,  html element to render. If NULL then the engine renders whole document.
-* \param[in] BOOL \b frontLayer,  TRUE if elementToRenderOrNull is not NULL and this is the topmost layer.
-* \return \b BOOL, \c TRUE if layer was rendered successfully.
+* \param[in] SBOOL \b frontLayer,  TRUE if elementToRenderOrNull is not NULL and this is the topmost layer.
+* \return \b SBOOL, \c TRUE if layer was rendered successfully.
 *
 **/
 BOOL SCAPI SciterRenderOnDirectXWindow(HWINDOW hwnd, HELEMENT elementToRenderOrNull /* = NULL*/, BOOL frontLayer /* = FALSE*/);
@@ -561,7 +565,7 @@ BOOL SCAPI SciterRenderOnDirectXWindow(HWINDOW hwnd, HELEMENT elementToRenderOrN
 * \param[in] HWINDOW \b hwnd, window handle to create Sciter on.
 * \param[in] HELEMENT \b elementToRenderOrNull,  html element to render. If NULL then the engine renders whole document.
 * \param[in] IDXGISurface \b surface, DirectX 2D texture to render in.
-* \return \b BOOL, \c TRUE if layer was rendered successfully.
+* \return \b SBOOL, \c TRUE if layer was rendered successfully.
 *
 **/
 BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOrNull, IUnknown* surface); // IDXGISurface
@@ -571,7 +575,7 @@ BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOr
  *
  * \param[in] hWndSciter \b HWINDOW, Sciter window handle.
  * \param[in] ID2D1RenderTarget \b prt, Direct2D render target.
- * \return \b BOOL, \c TRUE if hBmp is 24bpp or 32bpp, FALSE otherwise.
+ * \return \b SBOOL, \c TRUE if hBmp is 24bpp or 32bpp, FALSE otherwise.
  *
  **/
 
@@ -580,7 +584,7 @@ BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOr
 /** Obtain pointer to ID2D1Factory instance used by the engine:
  *
  * \param[in] ID2D1Factory \b **ppf, address of variable receiving pointer of ID2D1Factory.
- * \return \b BOOL, \c TRUE if parameters are valid and *ppf was set by valid pointer.
+ * \return \b SBOOL, \c TRUE if parameters are valid and *ppf was set by valid pointer.
  *
  * NOTE 1: ID2D1Factory returned by the function is "add-refed" - it is your responsibility to call Release() on it.
  * NOTE 2: *ppf variable shall be initialized to NULL before calling the function.
@@ -592,7 +596,7 @@ BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOr
 /** Obtain pointer to IDWriteFactory instance used by the engine:
  *
  * \param[in] IDWriteFactory \b **ppf, address of variable receiving pointer of IDWriteFactory.
- * \return \b BOOL, \c TRUE if parameters are valid and *ppf was set by valid pointer.
+ * \return \b SBOOL, \c TRUE if parameters are valid and *ppf was set by valid pointer.
  *
  * NOTE 1: IDWriteFactory returned by the function is "add-refed" - it is your responsibility to call Release() on it.
  * NOTE 2: *ppf variable shall be initialized to NULL before calling the function.
@@ -609,7 +613,7 @@ BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOr
  *                             0 - no compatible graphics found;
  *                             1 - compatible graphics found but Direct2D will use WARP driver (software emulation);
  *                             2 - Direct2D will use hardware backend (best performance);
- * \return \b BOOL, \c TRUE if pcaps is valid pointer.
+ * \return \b SBOOL, \c TRUE if pcaps is valid pointer.
  *
  **/
 

@@ -18,7 +18,6 @@
 #include "sciter-x-request.h"
 #include "sciter-x-msg.h"
 #include "value.h"
-#include "tiscript.h"
 
 #if !defined(WINDOWS)
   #include <stdlib.h>
@@ -43,10 +42,10 @@ struct SciterGraphicsAPI;
 struct SCITER_X_MSG;
 
 #ifdef WINDOWLESS
-  #define SCITER_API_VERSION 0x10005
+  #define SCITER_API_VERSION 0x10009
 #else 
-  #define SCITER_API_VERSION 5
-#endif // !WINDOWLESS
+  #define SCITER_API_VERSION 9
+#endif
 
 typedef struct _ISciterAPI {
 
@@ -240,14 +239,11 @@ typedef struct _ISciterAPI {
   UINT SCFN( ValueInvoke )( const VALUE* pval, VALUE* pthis, UINT argc, const VALUE* argv, VALUE* pretval, LPCWSTR url);
   UINT SCFN( ValueNativeFunctorSet )( VALUE* pval, NATIVE_FUNCTOR_INVOKE*  pinvoke, NATIVE_FUNCTOR_RELEASE* prelease, VOID* tag );
   BOOL SCFN( ValueIsNativeFunctor )( const VALUE* pval);
-
-  // tiscript VM API
-  tiscript_native_interface*  SCFN(TIScriptAPI)();
-
-  HVM  SCFN( SciterGetVM )( HWINDOW hwnd );
-
-  BOOL SCFN( Sciter_v2V ) (HVM vm, tiscript_value script_value, VALUE* value, BOOL isolate);
-  BOOL SCFN( Sciter_V2v ) (HVM vm, const VALUE* valuev, tiscript_value* script_value);
+  // used to be script VM API
+  LPVOID reserved1;
+  LPVOID reserved2;
+  LPVOID reserved3;
+  LPVOID reserved4;
 
   HSARCHIVE SCFN( SciterOpenArchive ) (LPCBYTE archiveData, UINT archiveDataLength);
   BOOL SCFN( SciterGetArchiveItem ) (HSARCHIVE harc, LPCWSTR path, LPCBYTE* pdata, UINT* pdataLength);
@@ -272,6 +268,19 @@ typedef struct _ISciterAPI {
   UINT64 SCFN(SciterAtomValue)(const char* name); // 
   BOOL   SCFN(SciterAtomNameCB)(UINT64 atomv, LPCSTR_RECEIVER* rcv, LPVOID rcv_param);
   BOOL   SCFN(SciterSetGlobalAsset)(som_asset_t* pass);
+
+  SCDOM_RESULT SCFN(SciterGetElementAsset)(HELEMENT el, UINT64 nameAtom, som_asset_t** ppass);
+
+  UINT   SCFN(SciterSetVariable)(HWINDOW hwndOrNull, LPCWSTR path, const VALUE* pvalToSet);
+  UINT   SCFN(SciterGetVariable)(HWINDOW hwndOrNull, LPCWSTR path, VALUE* pvalToGet);
+
+  UINT   SCFN(SciterElementUnwrap)(const VALUE* pval, HELEMENT* ppElement);
+  UINT   SCFN(SciterElementWrap)(VALUE* pval, HELEMENT pElement);
+
+  UINT   SCFN(SciterNodeUnwrap)(const VALUE* pval, HNODE* ppNode);
+  UINT   SCFN(SciterNodeWrap)(VALUE* pval, HNODE pNode);
+
+  SBOOL   SCFN(SciterReleaseGlobalAsset)(som_asset_t* pass);
 
 } ISciterAPI;
 
