@@ -15,7 +15,7 @@ func main() {
 	}
 	w.SetOption(sciter.SCITER_SET_SCRIPT_RUNTIME_FEATURES, sciter.ALLOW_FILE_IO | sciter.ALLOW_SOCKET_IO|sciter.ALLOW_EVAL | sciter.ALLOW_SYSINFO)
 
-	fullpath, err := filepath.Abs("./examples.ts/callback/index.html")//fullpath, err := filepath.Abs("index.html")
+	fullpath, err := filepath.Abs("./examples.js/callback/index.html")//fullpath, err := filepath.Abs("index.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -26,6 +26,7 @@ func main() {
 }
 
 func setEventHandler(w *window.Window) {
+	//注册函数到JavaScript 函数名getNetInformation
 	w.DefineFunction("getNetInformation", func(args ...*sciter.Value) *sciter.Value {
 		log.Println("Args Length:", len(args))
 		log.Println("Arg 0:", args[0], args[0].IsInt())
@@ -38,9 +39,13 @@ func setEventHandler(w *window.Window) {
 			log.Println(key, val)
 			return true
 		})
+		//------------------------------------------------------------------------------------------------------
+		//调用JavaScript 函数
 		fn := args[2]
 		fn.Invoke(sciter.NullValue(), "[Native Script]", sciter.NewValue("OK"))//调用 javascript
 
+		//-------------------------------------------------------------------------------------------------------
+		//返回JavaScript 值
 		ret := sciter.NewValue()
 		ret.Set("ip", sciter.NewValue("127.0.0.1"))
 		return ret
