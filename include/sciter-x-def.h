@@ -149,7 +149,7 @@ enum SC_LOAD_DATA_RETURN_CODES
 #define SC_INVALIDATE_RECT 0x09
 
 
-/**Notification callback structure.        ֪ͨ�Ļص��ṹ��
+/**Notification callback structure.        通知的回调结构。
  **/
 typedef struct SCITER_CALLBACK_NOTIFICATION
 {
@@ -339,7 +339,7 @@ typedef SCN_INVALIDATE_RECT *LPSCN_INVALIDATE_RECT;
  **/
  BOOL SCAPI     SciterLoadHtml(HWINDOW hWndSciter, LPCBYTE html, UINT htmlSize, LPCWSTR baseUrl);
 
-/**Set \link #SCITER_NOTIFY() notification callback function      SCITER_NOTIFY()֪ͨ�ص����� \endlink.
+/**Set \link #SCITER_NOTIFY() notification callback function      SCITER_NOTIFY()通知回调函数 \endlink.
  *
  * \param[in] hWndSciter \b HWINDOW, Sciter window handle.
  * \param[in] cb \b SCITER_NOTIFY*, \link #SCITER_NOTIFY() callback function \endlink.
@@ -486,7 +486,7 @@ enum SCITER_RT_OPTIONS
 
 } ;
 
- SBOOL SCAPI SciterSetOption(HWINDOW hWnd, UINT option, UINT_PTR value );
+ BOOL SCAPI SciterSetOption(HWINDOW hWnd, UINT option, UINT_PTR value );
 
 /**Get current pixels-per-inch metrics of the Sciter window
  *

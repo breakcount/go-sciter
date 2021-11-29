@@ -183,8 +183,8 @@ typedef struct _ISciterAPI {
   SCDOM_RESULT SCFN( SciterGetValue)( HELEMENT he, VALUE* pval );
   SCDOM_RESULT SCFN( SciterSetValue)( HELEMENT he, const VALUE* pval );
   SCDOM_RESULT SCFN( SciterGetExpando)( HELEMENT he, VALUE* pval, BOOL forceCreation );
-  SCDOM_RESULT SCFN( SciterGetObject)( HELEMENT he, tiscript_value* pval, BOOL forceCreation );
-  SCDOM_RESULT SCFN( SciterGetElementNamespace)(  HELEMENT he, tiscript_value* pval);
+  SCDOM_RESULT SCFN( SciterGetObject)( HELEMENT he, void* pval, BOOL forceCreation );
+  SCDOM_RESULT SCFN( SciterGetElementNamespace)(  HELEMENT he, void* pval);
   SCDOM_RESULT SCFN( SciterGetHighlightedElement)(HWINDOW hwnd, HELEMENT* phe);
   SCDOM_RESULT SCFN( SciterSetHighlightedElement)(HWINDOW hwnd, HELEMENT he);
 //|
@@ -280,7 +280,7 @@ typedef struct _ISciterAPI {
   UINT   SCFN(SciterNodeUnwrap)(const VALUE* pval, HNODE* ppNode);
   UINT   SCFN(SciterNodeWrap)(VALUE* pval, HNODE pNode);
 
-  SBOOL   SCFN(SciterReleaseGlobalAsset)(som_asset_t* pass);
+  BOOL   SCFN(SciterReleaseGlobalAsset)(som_asset_t* pass);
 
 } ISciterAPI;
 

@@ -363,9 +363,9 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
   BOOL SCAPI ValueIsNativeFunctor ( const VALUE* pval) { return SAPI(NULL)->ValueIsNativeFunctor (pval); }
 
   // conversion between script (managed) value and the VALUE ( com::variant alike thing )
-  inline SBOOL SCAPI SciterCreateOnDirectXWindow(HWINDOW hwnd, IUnknown* pSwapChain) { return SAPI()->SciterCreateOnDirectXWindow(hwnd,pSwapChain); }
-  inline SBOOL SCAPI SciterRenderOnDirectXWindow(HWINDOW hwnd, HELEMENT elementToRenderOrNull, SBOOL frontLayer) { return SAPI()->SciterRenderOnDirectXWindow(hwnd,elementToRenderOrNull,frontLayer); }
-  inline SBOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOrNull, IUnknown* surface) { return SAPI()->SciterRenderOnDirectXTexture(hwnd,elementToRenderOrNull,surface); }
+  BOOL SCAPI SciterCreateOnDirectXWindow(HWINDOW hwnd, IUnknown* pSwapChain) { return SAPI(NULL)->SciterCreateOnDirectXWindow(hwnd,pSwapChain); }
+  BOOL SCAPI SciterRenderOnDirectXWindow(HWINDOW hwnd, HELEMENT elementToRenderOrNull, BOOL frontLayer) { return SAPI(NULL)->SciterRenderOnDirectXWindow(hwnd,elementToRenderOrNull,frontLayer); }
+  BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOrNull, IUnknown* surface) { return SAPI(NULL)->SciterRenderOnDirectXTexture(hwnd,elementToRenderOrNull,surface); }
 //  BOOL SCAPI Sciter_V2v(HVM vm, const VALUE* value, tiscript_value* out_script_value) { return SAPI(NULL)->Sciter_V2v(vm,value,out_script_value); }
 
   BOOL SCAPI SciterProcX(HWINDOW hwnd, SCITER_X_MSG* pMsg) { return SAPI(NULL)->SciterProcX(hwnd, pMsg); }
@@ -374,16 +374,16 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
 		return SAPI(NULL)->SciterOpenArchive (archiveData, archiveDataLength);
 	}
 
-   UINT64 SCAPI SciterAtomValue(const char* name) { return SAPI()->SciterAtomValue(name); }
-   BOOL  SCAPI SciterAtomNameCB(UINT64 atomv, LPCSTR_RECEIVER* rcv, LPVOID rcv_param) { return SAPI()->SciterAtomNameCB(atomv, rcv, rcv_param); }
-   BOOL  SCAPI SciterSetGlobalAsset(som_asset_t* pass) { return SAPI()->SciterSetGlobalAsset(pass); }
-   BOOL  SCAPI SciterReleaseGlobalAsset(som_asset_t* pass) { return SAPI()->SciterReleaseGlobalAsset(pass); }
+   UINT64 SCAPI SciterAtomValue(const char* name) { return SAPI(NULL)->SciterAtomValue(name); }
+   BOOL  SCAPI SciterAtomNameCB(UINT64 atomv, LPCSTR_RECEIVER* rcv, LPVOID rcv_param) { return SAPI(NULL)->SciterAtomNameCB(atomv, rcv, rcv_param); }
+   BOOL  SCAPI SciterSetGlobalAsset(som_asset_t* pass) { return SAPI(NULL)->SciterSetGlobalAsset(pass); }
+   BOOL  SCAPI SciterReleaseGlobalAsset(som_asset_t* pass) { return SAPI(NULL)->SciterReleaseGlobalAsset(pass); }
 
-   UINT   SCAPI SciterElementUnwrap(const VALUE* pval, HELEMENT* ppElement) { return SAPI()->SciterElementUnwrap(pval, ppElement); }
-   UINT   SCAPI SciterElementWrap(VALUE* pval, HELEMENT pElement) { return SAPI()->SciterElementWrap(pval, pElement); }
+   UINT   SCAPI SciterElementUnwrap(const VALUE* pval, HELEMENT* ppElement) { return SAPI(NULL)->SciterElementUnwrap(pval, ppElement); }
+   UINT   SCAPI SciterElementWrap(VALUE* pval, HELEMENT pElement) { return SAPI(NULL)->SciterElementWrap(pval, pElement); }
 
-   UINT   SCAPI SciterNodeUnwrap(const VALUE* pval, HNODE* ppNode) { return SAPI()->SciterNodeUnwrap(pval, ppNode); }
-   UINT   SCAPI SciterNodeWrap(VALUE* pval, HNODE pNode) { return SAPI()->SciterNodeWrap(pval, pNode); }
+   UINT   SCAPI SciterNodeUnwrap(const VALUE* pval, HNODE* ppNode) { return SAPI(NULL)->SciterNodeUnwrap(pval, ppNode); }
+   UINT   SCAPI SciterNodeWrap(VALUE* pval, HNODE pNode) { return SAPI(NULL)->SciterNodeWrap(pval, pNode); }
 
 
   BOOL SCAPI SciterGetArchiveItem (HSARCHIVE harc, LPCWSTR path, LPCBYTE* pdata, UINT* pdataLength) {
