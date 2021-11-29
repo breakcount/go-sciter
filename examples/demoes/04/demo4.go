@@ -5,8 +5,8 @@ import (
 	"log"
 	"path/filepath"
 
-	"github.com/sciter-sdk/go-sciter"
-	"github.com/sciter-sdk/go-sciter/window"
+	"github.com/breakcount/go-sciter"
+	"github.com/breakcount/go-sciter/window"
 )
 
 //设置元素的处理程序

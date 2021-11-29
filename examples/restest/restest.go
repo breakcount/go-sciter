@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 	tool "github.com/GeertJohan/go.rice"
-	sciter "github.com/sciter-sdk/go-sciter"
-	rice "github.com/sciter-sdk/go-sciter/rice"
-	window "github.com/sciter-sdk/go-sciter/window"
+	sciter "github.com/breakcount/go-sciter"
+	rice "github.com/breakcount/go-sciter/rice"
+	window "github.com/breakcount/go-sciter/window"
 )
 
 /*
