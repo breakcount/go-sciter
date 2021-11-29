@@ -3,32 +3,32 @@
         <title>Test</title>
         <style>
 
-pre {
-  behavior:selectable;
-}
+        pre {
+          behavior:selectable;
+        }
 
         </style>
         <script type="module">
 
-var pre = document.querySelector("pre");
+        var pre = document.querySelector("pre");
 
-async function postit() {
-  try {
+        async function postit() {
+          try {
 
-    let resp = await fetch('http://httpbin.org/anything', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({a: 1, b: 'Textual content'})
-        });
-    
+            let resp = await fetch('http://httpbin.org/anything', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({a: 1, b: 'Textual content'})
+                });
 
-    pre.innerText = await resp.text();
-  } catch (e) {
-    console.log(e);
-  }
+
+                pre.innerText = await resp.text();
+          } catch (e) {
+            console.log(e);
+          }
 }
 
-postit();
+        postit();
 
         </script>
     </head>

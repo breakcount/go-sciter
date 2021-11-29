@@ -3,38 +3,38 @@
         <title>Test</title>
         <style>
 
-pre {
-  behavior:selectable;
-}
+        pre {
+          behavior:selectable;
+        }
 
         </style>
         <script type="module">
 
-import * as sys from "@sys";
+        import * as sys from "@sys";
 
-var pre = document.querySelector("pre");
+        var pre = document.querySelector("pre");
 
-async function postit() {
-  try {
+        async function postit() {
+          try {
 
-    let file = await sys.fs.open(URL.toPath(__DIR__ + "test-upload.htm"));
+            let file = await sys.fs.open(URL.toPath(__DIR__ + "test-upload.htm"));
 
-    let dataToSend = {"file1": file, "comment1": "this is just a test" };
+            let dataToSend = {"file1": file, "comment1": "this is just a test" };
 
-    var resp = await fetch("https://sciter.com/test/test-file-receiver.php", {
-      method: "POST",
-      body: dataToSend
-    });
+            var resp = await fetch("https://sciter.com/test/test-file-receiver.php", {
+              method: "POST",
+              body: dataToSend
+            });
 
-    file.close();
+            file.close();
 
-    pre.innerText = await resp.text();
-  } catch (e) {
-    console.log(e);
-  }
-}
+            pre.innerText = await resp.text();
+          } catch (e) {
+            console.log(e);
+          }
+        }
 
-postit();
+        postit();
 
         </script>
     </head>

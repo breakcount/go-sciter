@@ -3,27 +3,27 @@
         <title>Test</title>
         <style>
 
-plaintext {
-  border:1px solid;
-  size:*;
-}
+            plaintext {
+              border:1px solid;
+              size:*;
+            }
 
         </style>
         <script>
 
-var plaintext = document.querySelector("plaintext");
+        var plaintext = document.querySelector("plaintext");
 
-async function getit() {
-  try {
-    var resp = await fetch("https://sciter.com");
-    var data = resp.text();
-    plaintext.value = data;
-  } catch (e) {
-    console.log(e);
-  }
-}
+        async function getit() {
+          try {
+            var resp = await fetch("https://sciter.com");
+            var data = resp.text();
+            plaintext.value = data;
+          } catch (e) {
+            console.log(e);
+          }
+        }
 
-getit();
+        getit();
 
         </script>
     </head>
