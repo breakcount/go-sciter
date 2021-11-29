@@ -9,8 +9,8 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/lxn/win"
 	"github.com/breakcount/go-sciter"
+	"github.com/lxn/win"
 )
 
 func New(creationFlags sciter.WindowCreationFlag, rect *sciter.Rect) (*Window, error) {
@@ -59,8 +59,8 @@ func (s *Window) Run() {
 	// defer win.OleUninitialize()
 	s.run()
 	// start main gui message loop
-	msg := (*win.MSG)(unsafe.Pointer(win.GlobalAlloc(0, unsafe.Sizeof(win.MSG{}))))
-	defer win.GlobalFree(win.HGLOBAL(unsafe.Pointer(msg)))
+	msg := (*win.MSG)(unsafe.Pointer(win.GlobalAlloc(0, unsafe.Sizeof(win.MSG{})))) //分配内存
+	defer win.GlobalFree(win.HGLOBAL(unsafe.Pointer(msg)))//释放内存
 	for win.GetMessage(msg, 0, 0, 0) > 0 {
 		win.TranslateMessage(msg)
 		win.DispatchMessage(msg)
@@ -68,7 +68,7 @@ func (s *Window) Run() {
 }
 
 // delegate Windows GUI messsage
-func delegateProc(hWnd win.HWND, message uint, wParam uintptr, lParam uintptr, pParam uintptr, pHandled *int) int {
+func delegateProc(this uintptr,hWnd win.HWND, message uint, wParam uintptr, lParam uintptr, pParam uintptr, pHandled *int) int {
 	switch message {
 	case win.WM_DESTROY:
 		// log.Println("closing window ...")

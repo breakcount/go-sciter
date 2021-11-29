@@ -29,17 +29,19 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
 
     ISciterAPI* SAPI( ISciterAPI* ext ) {
        static ISciterAPI* _api = NULL;
-       if( ext ) _api = ext;
+       if( ext )
+        _api = ext;
        if( !_api )
        {
           HMODULE hm = LoadLibraryA( SCITER_DLL_PATH );
           if(hm) {
+            MessageBoxA(NULL,"AAA","AAA",MB_OK);
             SciterAPI_ptr sciterAPI = (SciterAPI_ptr) GetProcAddress(hm, "SciterAPI");
             if( sciterAPI ) {
               _api = sciterAPI();
-#if defined(__cplusplus)
-              tiscript::ni( _api->TIScriptAPI() );
-#endif
+// #if defined(__cplusplus)
+//               tiscript::ni( _api->TIScriptAPI() );
+// #endif
             } else {
               FreeLibrary(hm);
             }
@@ -231,7 +233,20 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
 #if defined(OSX)
    HWINDOW SCAPI SciterCreateNSView ( LPRECT frame ) { return SAPI(NULL)->SciterCreateNSView ( frame ); }
 #endif
-   HWINDOW SCAPI SciterCreateWindow ( UINT creationFlags,LPRECT frame, SciterWindowDelegate* delegate, LPVOID delegateParam, HWINDOW parent) { return SAPI(NULL)->SciterCreateWindow (creationFlags,frame,delegate,delegateParam,parent); }
+   HWINDOW SCAPI SciterCreateWindow (   UINT creationFlags,
+                                        LPRECT frame, 
+                                        SciterWindowDelegate* delegate, 
+                                        LPVOID delegateParam, 
+                                        HWINDOW parent) {
+    ISciterAPI* iApi =SAPI(NULL) ;
+    if (iApi) {
+        return iApi->SciterCreateWindow (creationFlags,frame,delegate,delegateParam,parent);
+    } else {
+        MessageBoxA(NULL,"SciterCreateWindow","SciterCreateWindow",MB_OK);
+        return 0 ;
+    }
+
+  }
 
   SCDOM_RESULT SCAPI Sciter_UseElement(HELEMENT he) { return SAPI(NULL)->Sciter_UseElement(he); }
   SCDOM_RESULT SCAPI Sciter_UnuseElement(HELEMENT he) { return SAPI(NULL)->Sciter_UnuseElement(he); }
