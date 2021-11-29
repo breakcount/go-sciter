@@ -28,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 	//加载文件
-	fp, err := filepath.Abs("demo2.html")
+	fp, err := filepath.Abs("./examples/demoes/demo2.html")
 	if err != nil {
 		log.Fatal(err)
 	}
