@@ -9,17 +9,19 @@ import (
 )
 
 func main() {
-	w, err := window.New(sciter.SW_TITLEBAR|sciter.SW_RESIZEABLE|sciter.SW_CONTROLS|sciter.SW_MAIN|sciter.SW_ENABLE_DEBUG, nil)
+	DefaultRect := &sciter.Rect{0, 0, 1280, 800}
+	w, err := window.New(sciter.SW_TITLEBAR|sciter.SW_RESIZEABLE|sciter.SW_CONTROLS|sciter.SW_MAIN|sciter.SW_ENABLE_DEBUG, DefaultRect)
 	if err != nil {
 		log.Fatal("Create Window Error: ", err)
 	}
-	fullpath, err := filepath.Abs("./examples.js/$/minimal-test.html")//fullpath, err := filepath.Abs("index.html")
+	fullpath, err := filepath.Abs("./examples.js/canvas/particles.htm")
+
 	if err != nil {
 		log.Fatal(err)
 	}
 	w.LoadFile(fullpath)
-
 	w.Show()
 	w.Run()
 }
+
 
