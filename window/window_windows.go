@@ -68,7 +68,7 @@ func (s *Window) Run() {
 }
 
 // delegate Windows GUI messsage
-func delegateProc(this uintptr,hWnd win.HWND, message uint, wParam uintptr, lParam uintptr, pParam uintptr, pHandled *int) int {
+func delegateProc(hWnd win.HWND, message uint, wParam uintptr, lParam uintptr, pParam uintptr, pHandled *int) int {
 	switch message {
 	case win.WM_DESTROY:
 		// log.Println("closing window ...")

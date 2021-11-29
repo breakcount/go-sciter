@@ -13,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Create Window Error: ", err)
 	}
-	fullpath, err := filepath.Abs("index.html")
+	fullpath, err := filepath.Abs("./examples/callback/index.html")//fullpath, err := filepath.Abs("index.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,3 +43,5 @@ func setEventHandler(w *window.Window) {
 		return ret
 	})
 }
+
+
