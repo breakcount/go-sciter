@@ -1,0 +1,19 @@
+<div>
+    <button id="btn">Click Me</button>
+</div>
+<script type="text/javascript" >
+function callback(abc){
+    //view.msgbox(#information,abc);
+    console.log("callback")
+}
+
+// $(#btn).on("click",function(){
+//     var obj = {num:100, str:"Hello World"};
+//     view.getNetInformation(1,"test",callback, obj);
+// });
+let btn = document.getElementById('btn');
+btn.addEventListener('click', () => {
+    var obj = {num:100, str:"Hello World"};
+    view.getNetInformation(1,"test",callback, obj);
+})
+</script>

@@ -32,3 +32,6 @@ sciter-sdk*/
 
 # editor config
 .vscode/
+/go.sum
+/.idea/modules.xml
+/.idea
