@@ -242,7 +242,7 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
     if (iApi) {
         return iApi->SciterCreateWindow (creationFlags,frame,delegate,delegateParam,parent);
     } else {
-        MessageBoxA(NULL,"SciterCreateWindow","SciterCreateWindow",MB_OK);
+        //MessageBoxA(NULL,"SciterCreateWindow","SciterCreateWindow",MB_OK);
         return 0 ;
     }
 
@@ -378,9 +378,11 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
   BOOL SCAPI ValueIsNativeFunctor ( const VALUE* pval) { return SAPI(NULL)->ValueIsNativeFunctor (pval); }
 
   // conversion between script (managed) value and the VALUE ( com::variant alike thing )
-  BOOL SCAPI SciterCreateOnDirectXWindow(HWINDOW hwnd, IUnknown* pSwapChain) { return SAPI(NULL)->SciterCreateOnDirectXWindow(hwnd,pSwapChain); }
-  BOOL SCAPI SciterRenderOnDirectXWindow(HWINDOW hwnd, HELEMENT elementToRenderOrNull, BOOL frontLayer) { return SAPI(NULL)->SciterRenderOnDirectXWindow(hwnd,elementToRenderOrNull,frontLayer); }
-  BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOrNull, IUnknown* surface) { return SAPI(NULL)->SciterRenderOnDirectXTexture(hwnd,elementToRenderOrNull,surface); }
+#if defined(WINDOWS)
+    BOOL SCAPI SciterCreateOnDirectXWindow(HWINDOW hwnd, IUnknown* pSwapChain) { return SAPI(NULL)->SciterCreateOnDirectXWindow(hwnd,pSwapChain); }
+    BOOL SCAPI SciterRenderOnDirectXWindow(HWINDOW hwnd, HELEMENT elementToRenderOrNull, BOOL frontLayer) { return SAPI(NULL)->SciterRenderOnDirectXWindow(hwnd,elementToRenderOrNull,frontLayer); }
+    BOOL SCAPI SciterRenderOnDirectXTexture(HWINDOW hwnd, HELEMENT elementToRenderOrNull, IUnknown* surface) { return SAPI(NULL)->SciterRenderOnDirectXTexture(hwnd,elementToRenderOrNull,surface); }
+#endif
 //  BOOL SCAPI Sciter_V2v(HVM vm, const VALUE* value, tiscript_value* out_script_value) { return SAPI(NULL)->Sciter_V2v(vm,value,out_script_value); }
 
   BOOL SCAPI SciterProcX(HWINDOW hwnd, SCITER_X_MSG* pMsg) { return SAPI(NULL)->SciterProcX(hwnd, pMsg); }
