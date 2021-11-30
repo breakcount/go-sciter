@@ -13,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Create Window Error: ", err)
 	}
-	fullpath, err := filepath.Abs("./examples.js/$/minimal-test.html")//fullpath, err := filepath.Abs("index.html")
+	fullpath, err := filepath.Abs("./examples.js/$/minimal-test.html") //fullpath, err := filepath.Abs("index.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -22,4 +22,3 @@ func main() {
 	w.Show()
 	w.Run()
 }
-

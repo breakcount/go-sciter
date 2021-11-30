@@ -15,7 +15,7 @@ func main() {
 		log.Fatal("Create Window Error: ", err)
 	}
 	testHtml := "test-fetch-sciter"
-	fullpath:= ""
+	fullpath := ""
 	switch testHtml {
 	case "test-fetch":
 		fullpath, err = filepath.Abs("./examples.js/fetch(AJAX)/test-fetch.htm")
@@ -36,5 +36,3 @@ func main() {
 	w.Show()
 	w.Run()
 }
-
-
