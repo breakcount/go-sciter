@@ -35,7 +35,7 @@ const char * SCITER_DLL_PATH = SCITER_DLL_NAME;
        {
           HMODULE hm = LoadLibraryA( SCITER_DLL_PATH );
           if(hm) {
-            MessageBoxA(NULL,"AAA","AAA",MB_OK);
+//            MessageBoxA(NULL,"AAA","AAA",MB_OK);
             SciterAPI_ptr sciterAPI = (SciterAPI_ptr) GetProcAddress(hm, "SciterAPI");
             if( sciterAPI ) {
               _api = sciterAPI();
